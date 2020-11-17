@@ -64,8 +64,76 @@ Site Wether
 | 拠点登録機能 | 自宅などの主要地点の天気をいち早く知る | 地図上に任意の場所を指定する | ・地図上をクリックして場所指定するか、場所検索で指定した位置に拠点をおく<br>・自身のユーザー情報から「拠点情報」ボタンをクリックすると、拠点登録した場所周辺の天気情報を近い順から一覧表示する |
 | 悪天候通知機能 | 悪天候をいち早く通知する | 現在地付近と拠点付近に警報が出たり悪天候投稿が多くなった場合に通知する | ・現在地と拠点場所の周辺が悪天候だと通知する<br>・警報が出た時のみ通知/悪天候投稿が多い時も通知/通知しないの3項目から通知の形態が選べる |
 
-## データベース設計
-現在作成中
+# テーブル設計
+
+## usersテーブル
+
+| Column        | Type    | Options     |
+| ------------- | ------- | ----------- |
+| name          | string  | null: false |
+| email         | string  | null: false |
+| password      | string  | null: false |
+
+### Association
+- has_many :tweets
+- has_many :comments
+- has_many :relations
+- has_many :favorites
+
+
+## tweetsテーブル
+
+| Column        | Type    | Options                        |
+| ------------- | ------- | ------------------------------ |
+| text          | text    |                                |
+| image         | string  |                                |
+| wether        | integer | null: false                    |
+| temperature   | integer | null: false                    |
+| wind          | integer | null: false                    |
+| user_id       | integer | null: false, foreign_key: true |
+
+### Association
+- belongs_to :user
+- has_many :comment
+- has_many :favorite
+
+
+## commentsテーブル
+
+| Column       | Type    | Options                        |
+| ------------ | ------- | ------------------------------ |
+| comment      | string  | null: false                    |
+| user_id      | integer | null: false, foreign_key: true |
+| tweet_id     | integer | null: false, fareign_key: true |
+
+### Association
+- belongs_to :user
+- belongs_to :tweet
+
+
+## relationsテーブル
+
+| Column       | Type    | Options                         |
+| ------------ | ------- | ------------------------------- |
+| user_id      | integer | null: false, foreign_key: true  |
+| follow_id    | integer | null: false, foreign_key: users |
+
+### Association
+- belongs_to :user
+- belongs_to :follow, class_name: 'User'
+
+
+## favoritesテーブル
+
+| Column       | Type    | Options                        |
+| ------------ | ------- | ------------------------------ |
+| user_id      | integer | null: false, foreign_key: true |
+| tweet_id     | integer | null: false, foreign_key: true |
+
+### Association
+- belongs_to :user
+- belongs_to :tweet
+
 
 ## ローカルでの動作方法
 現在作成中
