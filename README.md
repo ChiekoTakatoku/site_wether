@@ -91,6 +91,8 @@ Site Wether
 | wether        | integer | null: false                    |
 | temperature   | integer | null: false                    |
 | wind          | integer | null: false                    |
+| prefecture    | integer | null: false                    |
+| address       | integer | null: false                    |
 | user_id       | integer | null: false, foreign_key: true |
 
 ### Association
