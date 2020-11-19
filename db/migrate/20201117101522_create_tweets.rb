@@ -5,6 +5,8 @@ class CreateTweets < ActiveRecord::Migration[6.0]
       t.integer         :wether        , null: false
       t.integer         :temperature   , null: false
       t.integer         :wind          , null: false
+      t.integer         :prefecture    , null: false
+      t.string          :address       , null: false
       t.references      :user          , null: false, foreign_key: true
 
       t.timestamps
