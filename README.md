@@ -97,8 +97,8 @@ Site Wether
 
 ### Association
 - belongs_to :user
-- has_many :comment
-- has_many :favorite
+- has_many :comments
+- has_many :favorites
 
 
 ## commentsテーブル
